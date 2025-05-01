@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.expensetracker.ui.home.ExpenseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.example.expensetracker.R*;
+import com.example.expensetracker.R;
 import com.example.expensetracker.ui.home.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,15 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigation.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
-            switch (item.getItemId()) {
-                case R.id.:
-                    selectedFragment = new ExpenseFragment();
-                    break;
-                case R.id.nav_list:
-                    selectedFragment = new ListFragment();
-                    break;
+            int itemId = item.getItemId();
+            if(itemId == R.id.nav_expense)
+            {
+                selectedFragment = new ExpenseFragment();
             }
-            if (selectedFragment != null) {
+            else if(itemId==R.id.nav_list)
+            {
+                selectedFragment=new ListFragment();
+            }
+            if(selectedFragment!=null)
+            {
                 loadFragment(selectedFragment);
                 return true;
             }
