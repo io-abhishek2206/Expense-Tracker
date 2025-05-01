@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.expensetracker.ui.home.ExpenseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.example.expensetracker.R;
 import com.example.expensetracker.ui.home.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
