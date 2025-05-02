@@ -7,12 +7,12 @@
     android:padding="16dp"
     android:background="#FFFFFF">
 
-    <!-- Monthly Expense Summary Box -->
+    <!-- Monthly Income Summary Box -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="110dp"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="6dp">
 
@@ -24,34 +24,154 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/monthlyExpenseTitle"
+                android:id="@+id/monthlyIncomeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Monthly Expense"
+                android:text="Total Monthly Income"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/monthlyExpenseAmount"
+                android:id="@+id/monthlyIncomeAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="₹0.00"
-                android:textColor="#FF5722"
+                android:textColor="#4CAF50"
                 android:textSize="26sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Monthly Expense Summary Box -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/monthlyExpenseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Monthly Expense"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/monthlyExpenseAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹0.00"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#FF5722" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <!-- Placeholder for expense input section -->
-    <TextView
-        android:id="@+id/placeholder"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add your Expense form or content here"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:textColor="#666666"/>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Income Card -->
+        <!-- ...[Same as before for Income & Expense Summary Cards]... -->
+
+        <!-- Transaction Type Selector -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Select Transaction Type:"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/typeSelector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Income" />
+
+            <RadioButton
+                android:id="@+id/radioExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:text="Expense" />
+        </RadioGroup>
+
+        <!-- Income Input Section -->
+        <LinearLayout
+            android:id="@+id/incomeInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/incomeAmountInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Income Amount"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <!-- Expense Input Section -->
+        <LinearLayout
+            android:id="@+id/expenseInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/expense_categories" />
+
+            <EditText
+                android:id="@+id/expenseAmountInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Expense Amount"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/expenseDateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select Date"
+                android:focusable="false"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Transaction" />
+    </LinearLayout>
 </LinearLayout>
