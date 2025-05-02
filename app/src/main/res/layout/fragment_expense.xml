@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
+    <!-- Monthly Expense Summary Box -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/monthlyExpenseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Monthly Expense"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/monthlyExpenseAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="₹0.00"
+                android:textColor="#FF5722"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Placeholder for expense input section -->
     <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:id="@+id/placeholder"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Expense Screen"
-        android:textSize="20sp" />
-</FrameLayout>
+        android:text="Add your Expense form or content here"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:textColor="#666666"/>
+</LinearLayout>
