@@ -132,7 +132,7 @@
                 android:id="@+id/incomeAmountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Income Amount"
+                android:hint="₹ Enter Income Amount"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
@@ -148,20 +148,22 @@
                 android:id="@+id/categorySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:entries="@array/expense_categories" />
 
             <EditText
                 android:id="@+id/expenseAmountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Expense Amount"
+                android:hint="₹ Enter Expense Amount"
+                android:layout_marginTop="10dp"
                 android:inputType="numberDecimal" />
 
             <EditText
                 android:id="@+id/expenseDateInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:hint="Select Date"
                 android:focusable="false"
                 android:clickable="true" />
@@ -172,6 +174,7 @@
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Add Transaction" />
     </LinearLayout>
 </LinearLayout>
