@@ -20,6 +20,12 @@ public class ExpenseFragment extends Fragment {
     private Spinner categorySpinner;
     private Button submitButton;
 
+    private float totalIncome = 0;
+    private TextView totalIncomeText;
+    private float totalExpense = 0;
+
+    private TextView totalExpenseText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,16 +57,29 @@ public class ExpenseFragment extends Fragment {
                 expenseInputLayout.setVisibility(View.VISIBLE);
             }
         });
-
+        totalIncomeText = view.findViewById(R.id.monthlyIncomeAmount);
+        totalExpenseText = view.findViewById(R.id.monthlyExpenseAmount);
         submitButton.setOnClickListener(v -> {
             if (radioIncome.isChecked()) {
-                String income = incomeAmountInput.getText().toString().trim();
-                Toast.makeText(getContext(), "Income added: ₹" + income, Toast.LENGTH_SHORT).show();
+                String incomeStr = incomeAmountInput.getText().toString().trim();
+                if (!incomeStr.isEmpty()) {
+                    float income = Float.parseFloat(incomeStr);
+                    totalIncome += income;
+                    totalIncomeText.setText("₹" + String.format(Locale.getDefault(), "%.2f", totalIncome));
+                    Toast.makeText(getContext(), "Income added ₹" + income, Toast.LENGTH_SHORT).show();
+                    incomeAmountInput.setText(""); // optional: clear field
+                }
             } else if (radioExpense.isChecked()) {
                 String category = categorySpinner.getSelectedItem().toString();
                 String amount = expenseAmountInput.getText().toString().trim();
                 String date = expenseDateInput.getText().toString();
-                Toast.makeText(getContext(), "Expense added: ₹" + amount + " on " + date + " (" + category + ")", Toast.LENGTH_SHORT).show();
+                if (!amount.isEmpty()) {
+                    float expense = Float.parseFloat(amount);
+                    totalExpense +=expense;
+                    totalExpenseText.setText("₹" + String.format(Locale.getDefault(), "%.2f", totalExpense));
+                    Toast.makeText(getContext(), "Expense added: ₹" + amount + " on " + date + " (" + category + ")", Toast.LENGTH_SHORT).show();
+                    expenseAmountInput.setText(""); // optional: clear field
+                }
             }
         });
 
