@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +25,8 @@ public class ListFragment extends Fragment {
     private PieChart pieChart;
     private RecyclerView expenseRecyclerView;
     private ExpenseAdapter adapter;
-    private List<ExpenseItem> expenseList;
+    private List<ExpenseItem> expenseList = new ArrayList<>();
+    private ExpenseViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,15 +35,18 @@ public class ListFragment extends Fragment {
 
         pieChart = view.findViewById(R.id.pieChart);
         expenseRecyclerView = view.findViewById(R.id.expenseRecyclerView);
+        expenseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Sample Data
-        expenseList = new ArrayList<>();
-        expenseList.add(new ExpenseItem("Food", 200, "01/05/2025"));
-        expenseList.add(new ExpenseItem("Transport", 100, "02/05/2025"));
-        expenseList.add(new ExpenseItem("Shopping", 150, "03/05/2025"));
+        adapter = new ExpenseAdapter(expenseList);
+        expenseRecyclerView.setAdapter(adapter);
 
-        setupPieChart();
-        setupRecyclerView();
+        viewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
+        viewModel.getExpenseList().observe(getViewLifecycleOwner(), updatedList -> {
+            expenseList.clear();
+            expenseList.addAll(updatedList);
+            setupPieChart();
+            adapter.notifyDataSetChanged();
+        });
 
         return view;
     }
@@ -48,9 +54,7 @@ public class ListFragment extends Fragment {
     private void setupPieChart() {
         List<PieEntry> entries = new ArrayList<>();
         for (ExpenseItem item : expenseList) {
-            if (item.getAmount() > 0 && item.getCategory() != null && !item.getCategory().isEmpty()) {
-                entries.add(new PieEntry(item.getAmount(), item.getCategory()));
-            }
+            entries.add(new PieEntry(item.getAmount(), item.getCategory()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Expenses");
@@ -58,12 +62,6 @@ public class ListFragment extends Fragment {
         PieData data = new PieData(dataSet);
         data.setValueTextSize(14f);
         pieChart.setData(data);
-        pieChart.invalidate(); // refresh
-    }
-
-    private void setupRecyclerView() {
-        adapter = new ExpenseAdapter(expenseList);
-        expenseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        expenseRecyclerView.setAdapter(adapter);
+        pieChart.invalidate();
     }
 }

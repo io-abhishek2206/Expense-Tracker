@@ -3,9 +3,10 @@ package com.example.expensetracker;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.example.expensetracker.ui.home.ListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.expensetracker.ui.home.ExpenseFragment;
-import com.example.expensetracker.ui.home.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
