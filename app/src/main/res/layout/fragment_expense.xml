@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="12dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="6dp">
@@ -126,7 +126,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="₹ Enter Income Amount"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:maxLength="10" />
         </LinearLayout>
 
         <!-- Expense Input Section -->
@@ -142,15 +143,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:padding="12dp"
+                android:background="@drawable/spinner_outline"
                 android:entries="@array/expense_categories" />
 
             <EditText
                 android:id="@+id/expenseAmountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="₹ Enter Expense Amount"
                 android:layout_marginTop="10dp"
-                android:inputType="numberDecimal" />
+                android:hint="₹ Enter Expense Amount"
+                android:inputType="numberDecimal"
+                android:maxLength="10" />
 
             <EditText
                 android:id="@+id/expenseDateInput"
