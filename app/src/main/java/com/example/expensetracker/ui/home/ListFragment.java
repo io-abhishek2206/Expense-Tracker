@@ -34,7 +34,7 @@ public class ListFragment extends Fragment {
     private PieChart pieChart;
     private RecyclerView expenseRecyclerView;
     private ExpenseAdapter adapter;
-    private List<ExpenseItem> expenseList = new ArrayList<>();
+    private final List<ExpenseItem> expenseList = new ArrayList<>();
     private ExpenseViewModel viewModel;
 
     @Override
