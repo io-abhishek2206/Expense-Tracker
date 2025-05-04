@@ -1,5 +1,6 @@
 package com.example.expensetracker.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,18 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 public class ListFragment extends Fragment {
 
+    private final Map<String, Integer> categoryColorMap = new HashMap<String, Integer>() {{
+        put("Food", Color.parseColor("#F44336"));       // Red
+        put("Transport", Color.parseColor("#2196F3"));  // Blue
+        put("Shopping", Color.parseColor("#4CAF50"));   // Green
+        put("Entertainment", Color.parseColor("#FF9800")); // Orange
+        put("Other", Color.parseColor("#9C27B0"));      // Purple
+    }};
     private PieChart pieChart;
     private RecyclerView expenseRecyclerView;
     private ExpenseAdapter adapter;
@@ -53,15 +62,32 @@ public class ListFragment extends Fragment {
 
     private void setupPieChart() {
         List<PieEntry> entries = new ArrayList<>();
+        Map<String, Float> categoryTotals = new HashMap<>();
+
         for (ExpenseItem item : expenseList) {
-            entries.add(new PieEntry(item.getAmount(), item.getCategory()));
+            String category = item.getCategory();
+            categoryTotals.put(category,
+                    categoryTotals.getOrDefault(category, 0f) + item.getAmount());
+        }
+
+        for (Map.Entry<String, Float> entry : categoryTotals.entrySet()) {
+            entries.add(new PieEntry(entry.getValue(), entry.getKey()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Expenses");
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        // Assign consistent colors
+        List<Integer> colors = new ArrayList<>();
+        for (PieEntry entry : entries) {
+            String category = entry.getLabel();
+            Integer color = categoryColorMap.getOrDefault(category, Color.GRAY); // default if not defined
+            colors.add(color);
+        }
+
+        dataSet.setColors(colors);
         PieData data = new PieData(dataSet);
         data.setValueTextSize(14f);
         pieChart.setData(data);
-        pieChart.invalidate();
+        pieChart.invalidate(); // refresh
     }
 }
