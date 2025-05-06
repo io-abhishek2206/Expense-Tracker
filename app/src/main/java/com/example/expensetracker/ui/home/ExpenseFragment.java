@@ -34,11 +34,8 @@ public class ExpenseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expense, container, false);
-
-        // Initialize ViewModel (shared with other fragments)
         viewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
 
-        // View bindings
         typeSelector = view.findViewById(R.id.typeSelector);
         radioIncome = view.findViewById(R.id.radioIncome);
         radioExpense = view.findViewById(R.id.radioExpense);
@@ -52,16 +49,11 @@ public class ExpenseFragment extends Fragment {
         totalIncomeText = view.findViewById(R.id.monthlyIncomeAmount);
         totalExpenseText = view.findViewById(R.id.monthlyExpenseAmount);
 
-        // Set up date picker
         expenseDateInput.setFocusable(false);
         expenseDateInput.setClickable(true);
         expenseDateInput.setOnClickListener(v -> showDatePicker());
-
-        // Set today's date
         String today = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         expenseDateInput.setText(today);
-
-        // Toggle input layout based on type
         typeSelector.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radioIncome) {
                 incomeInputLayout.setVisibility(View.VISIBLE);
@@ -72,14 +64,14 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
-        // Observe LiveData for total values
+
         viewModel.getTotalIncome().observe(getViewLifecycleOwner(), income ->
                 totalIncomeText.setText("₹" + String.format(Locale.getDefault(), "%.2f", income)));
 
         viewModel.getTotalExpense().observe(getViewLifecycleOwner(), expense ->
                 totalExpenseText.setText("₹" + String.format(Locale.getDefault(), "%.2f", expense)));
 
-        // Handle submit button
+
         submitButton.setOnClickListener(v -> {
             if (radioIncome.isChecked()) {
                 String incomeStr = incomeAmountInput.getText().toString().trim();
@@ -113,7 +105,7 @@ public class ExpenseFragment extends Fragment {
         return view;
     }
 
-    // ✅ Moved this method OUTSIDE onCreateView
+
     private void showDatePicker() {
         final Calendar calendar = Calendar.getInstance();
 

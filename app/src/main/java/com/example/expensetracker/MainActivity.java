@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
-
-        // Load default fragment (ExpenseInputFragment)
         loadFragment(new ExpenseFragment());
 
         bottomNavigation.setOnItemSelectedListener(item -> {

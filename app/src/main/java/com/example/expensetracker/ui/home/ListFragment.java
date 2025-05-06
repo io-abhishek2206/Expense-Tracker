@@ -16,7 +16,6 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,11 +75,10 @@ public class ListFragment extends Fragment {
 
         PieDataSet dataSet = new PieDataSet(entries, "Expenses");
 
-        // Assign consistent colors
         List<Integer> colors = new ArrayList<>();
         for (PieEntry entry : entries) {
             String category = entry.getLabel();
-            Integer color = categoryColorMap.getOrDefault(category, Color.GRAY); // default if not defined
+            Integer color = categoryColorMap.getOrDefault(category, Color.GRAY);
             colors.add(color);
         }
 
@@ -88,6 +86,6 @@ public class ListFragment extends Fragment {
         PieData data = new PieData(dataSet);
         data.setValueTextSize(14f);
         pieChart.setData(data);
-        pieChart.invalidate(); // refresh
+        pieChart.invalidate();
     }
 }
